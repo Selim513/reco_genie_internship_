@@ -1,3 +1,3 @@
-# reco_genie_internship_
+# reco_genie_internship
 
 A new Flutter project.

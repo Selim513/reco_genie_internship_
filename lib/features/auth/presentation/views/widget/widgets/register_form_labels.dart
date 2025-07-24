@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reco_genie_internship_/features/auth/presentation/views/widget/widgets/custom_auth_text_form.dart';
+import 'package:reco_genie_internship/features/auth/presentation/views/widget/widgets/custom_auth_text_form.dart';
 
 class RegistrationFormLabels extends StatelessWidget {
   const RegistrationFormLabels({super.key});

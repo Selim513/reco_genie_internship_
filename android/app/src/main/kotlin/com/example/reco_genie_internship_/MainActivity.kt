@@ -1,4 +1,4 @@
-package com.example.reco_genie_internship_
+package com.example.reco_genie_internship
 
 import io.flutter.embedding.android.FlutterActivity
 

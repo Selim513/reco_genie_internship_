@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reco_genie_internship_/features/auth/presentation/views/register_view.dart';
+import 'package:reco_genie_internship/features/auth/presentation/views/register_view.dart';
 
 void main() {
     WidgetsFlutterBinding.ensureInitialized();

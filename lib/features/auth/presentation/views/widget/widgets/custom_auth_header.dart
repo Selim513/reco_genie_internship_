@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reco_genie_internship_/core/utils/app_colors.dart';
-import 'package:reco_genie_internship_/core/utils/app_fonts.dart';
+import 'package:reco_genie_internship/core/utils/app_colors.dart';
+import 'package:reco_genie_internship/core/utils/app_fonts.dart';
 
 
 class AuthHeaderSection extends StatelessWidget {

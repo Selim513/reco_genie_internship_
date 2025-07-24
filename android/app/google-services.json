@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295532234110",
+    "project_id": "reco-genie-internship",
+    "storage_bucket": "reco-genie-internship.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295532234110:android:863d1c38e6f979e9091f2f",
+        "android_client_info": {
+          "package_name": "com.example.reco_genie_internship"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYEL6ZI_W9ahUkk3iV5mOqs1r1aYDGAjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295532234110:android:5dfa4b22f96212bd091f2f",
+        "android_client_info": {
+          "package_name": "com.example.reco_genie_internship"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYEL6ZI_W9ahUkk3iV5mOqs1r1aYDGAjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
