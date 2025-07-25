@@ -1,14 +1,12 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reco_genie_internship/core/utils/app_fonts.dart';
-import 'package:reco_genie_internship/features/auth/presentation/views/login_view.dart';
 
 class CustomAuthRedirectText extends StatelessWidget {
-  const CustomAuthRedirectText({
-    super.key,
-  });
+  const CustomAuthRedirectText({super.key, this.onTap, required this.isLogin});
+  final bool isLogin;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +18,19 @@ class CustomAuthRedirectText extends StatelessWidget {
             fontWeight: FontWeight.normal,
           ),
           children: [
-            TextSpan(text: 'Already Have an account? '),
             TextSpan(
-              text: 'Login',
+              text: isLogin
+                  ? 'Already Have an account? '
+                  : 'Dont have an account',
+            ),
+            TextSpan(
+              text: isLogin ? 'Login' : 'Join',
               style: AppFonts.regularBoldBlack14.copyWith(
                 decoration: TextDecoration.underline,
                 decorationColor: Colors.black,
                 decorationThickness: 1.5,
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginView()),
-                  );
-                },
+              recognizer: TapGestureRecognizer()..onTap = onTap,
             ),
           ],
         ),

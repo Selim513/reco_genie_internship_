@@ -56,7 +56,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   child: Column(
                     spacing: 12.h,
                     children: [
-                      RegistrationFormLabels(
+                      AuthFormLabel(
+                        isRegister: true,
                         emailController: emailContoller,
                         passwordController: passwordContoller,
                         nameController: nameContoller,
@@ -66,10 +67,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                           ? CircularProgressIndicator()
                           : CustomElevatedButton(
                               onPress: () async {
-                                print(nameContoller.text);
-                                print(emailContoller.text);
-                                print(passwordContoller.text);
-                                print('--------------$formKey');
                                 if (formKey.currentState!.validate()) {
                                   context.read<AuthBloc>().add(
                                     RegisterEvent(
@@ -91,7 +88,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
             ),
             // Spacer(),
-            CustomAuthRedirectText(),
+            CustomAuthRedirectText(
+              isLogin: true,
+              onTap: () => context.goNamed(AppRouter.loginView),
+            ),
           ],
         ),
       ),

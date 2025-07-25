@@ -10,7 +10,7 @@ class AuthRepoImpl extends AuthRepo {
     try {
       await auth.login(email: email, password: password);
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 
@@ -20,6 +20,10 @@ class AuthRepoImpl extends AuthRepo {
     required String email,
     required String password,
   }) async {
-    await auth.register(name: name, email: email, password: password);
+    try {
+      await auth.register(name: name, email: email, password: password);
+    } catch (e) {
+      throw (e.toString());
+    }
   }
 }

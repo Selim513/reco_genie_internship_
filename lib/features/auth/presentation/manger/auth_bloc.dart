@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reco_genie_internship/core/enums/general_bloc_enum.dart';
 import 'package:reco_genie_internship/features/auth/domain/use_case/login_use_case.dart';
@@ -24,13 +25,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       } catch (e) {
-        print(e);
+        if (e is FirebaseAuthException) {
+          emit(state.copyWith(status: BlocStatus.fail, errMessage: e.message));
+        } else {
+          emit(
+            state.copyWith(
+              status: BlocStatus.fail,
+              errMessage: 'Something went wrong.',
+            ),
+          );
+        }
+      }
+    });
+    on<LoginEvent>((event, emit) async {
+      emit(state.copyWith(status: BlocStatus.loading));
+      try {
+        await login.call(email: event.email, password: event.password);
         emit(
           state.copyWith(
-            status: BlocStatus.fail,
-            errMessage: '--${e.toString()}',
+            status: BlocStatus.success,
+            succMessage: 'Welcome Back',
           ),
         );
+      } catch (e) {
+        if (e is FirebaseAuthException) {
+          emit(state.copyWith(status: BlocStatus.fail, errMessage: e.message));
+        } else {
+          emit(
+            state.copyWith(
+              status: BlocStatus.fail,
+              errMessage: 'Something went wrong.',
+            ),
+          );
+        }
       }
     });
   }
