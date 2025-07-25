@@ -7,11 +7,7 @@ class AuthRepoImpl extends AuthRepo {
   AuthRepoImpl(this.auth);
   @override
   Future<void> login({required String email, required String password}) async {
-    try {
-      await auth.login(email: email, password: password);
-    } catch (e) {
-      throw (e.toString());
-    }
+    await auth.login(email: email, password: password);
   }
 
   @override
@@ -20,10 +16,6 @@ class AuthRepoImpl extends AuthRepo {
     required String email,
     required String password,
   }) async {
-    try {
-      await auth.register(name: name, email: email, password: password);
-    } catch (e) {
-      throw (e.toString());
-    }
+    await auth.register(name: name, email: email, password: password);
   }
 }

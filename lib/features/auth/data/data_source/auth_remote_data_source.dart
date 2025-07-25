@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:reco_genie_internship/core/errors/firebase_error.dart';
+import 'package:reco_genie_internship/core/utils/service_locator.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> register({
@@ -10,22 +12,21 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
+  final FirebaseAuth auth = getIt.get<FirebaseAuth>();
   @override
   Future<void> login({required String email, required String password}) async {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        throw ('No user found for that email.');
-        // print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        throw ('Wrong password provided for that user.');
-
-        // print('Wrong password provided for that user.');
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      if (auth.currentUser != null && !auth.currentUser!.emailVerified) {
+        throw Exception('Please verify your email before logging in.');
       }
+    } on FirebaseAuthException catch (e) {
+      throw Exception(FirebaseError.getLoginErrorMessage(e));
+    } catch (e) {
+      if (e is Exception) {
+        rethrow;
+      }
+      throw Exception('An unexpected error occurred during login.');
     }
   }
 
@@ -36,20 +37,22 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw ('The password provided is too weak.');
-        // print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        throw ('The account already exists for that email.');
-        // print('The account already exists for that email.');
+      final credential = await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // ✅ تحديث الـ display name
+      if (credential.user != null && name.isNotEmpty) {
+        await credential.user!.updateDisplayName(name);
+        await credential.user!.sendEmailVerification();
       }
+    } on FirebaseAuthException catch (e) {
+      throw Exception(FirebaseError.getRegisterErrorMessage(e));
     } catch (e) {
-      FirebaseAuthException(
-        code: e.toString(),
-      message: 'There is something went wrong please try again later',
+      throw FirebaseAuthException(
+        code: 'unknown',
+        message: 'An unexpected error occurred during registration.',
       );
     }
   }

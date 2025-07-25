@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reco_genie_internship/core/enums/general_bloc_enum.dart';
 import 'package:reco_genie_internship/features/auth/domain/use_case/login_use_case.dart';
@@ -11,8 +10,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase login;
   AuthBloc(this.register, this.login) : super(AuthState()) {
     on<RegisterEvent>((event, emit) async {
-      emit(state.copyWith(status: BlocStatus.loading));
       try {
+        emit(state.copyWith(status: BlocStatus.loading));
         await register.call(
           email: event.email,
           password: event.password,
@@ -21,25 +20,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(
           state.copyWith(
             status: BlocStatus.success,
-            succMessage: 'Registeration success',
+            succMessage: 'Registeration success please verify your email',
           ),
         );
       } catch (e) {
-        if (e is FirebaseAuthException) {
-          emit(state.copyWith(status: BlocStatus.fail, errMessage: e.message));
-        } else {
-          emit(
-            state.copyWith(
-              status: BlocStatus.fail,
-              errMessage: 'Something went wrong.',
-            ),
-          );
-        }
+        emit(
+          state.copyWith(
+            status: BlocStatus.fail,
+            errMessage: e.toString().replaceFirst('Exception: ', ''),
+          ),
+        );
       }
     });
     on<LoginEvent>((event, emit) async {
-      emit(state.copyWith(status: BlocStatus.loading));
       try {
+        emit(state.copyWith(status: BlocStatus.loading));
         await login.call(email: event.email, password: event.password);
         emit(
           state.copyWith(
@@ -48,16 +43,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       } catch (e) {
-        if (e is FirebaseAuthException) {
-          emit(state.copyWith(status: BlocStatus.fail, errMessage: e.message));
-        } else {
-          emit(
-            state.copyWith(
-              status: BlocStatus.fail,
-              errMessage: 'Something went wrong.',
-            ),
-          );
-        }
+        emit(
+          state.copyWith(
+            status: BlocStatus.fail,
+            errMessage: e.toString().replaceFirst('Exception: ', ''),
+          ),
+        );
       }
     });
   }

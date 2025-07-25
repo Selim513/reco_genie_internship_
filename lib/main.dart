@@ -10,9 +10,9 @@ import 'package:reco_genie_internship/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  serviceLocator();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = SimpleBlocObserver();
+  serviceLocator();
   runApp(const MainApp());
 }
 

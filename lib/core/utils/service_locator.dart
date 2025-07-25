@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:reco_genie_internship/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:reco_genie_internship/features/auth/data/repo/auth_repo_impl.dart';
@@ -7,6 +8,8 @@ import 'package:reco_genie_internship/features/auth/domain/use_case/register_use
 
 final GetIt getIt = GetIt.instance;
 void serviceLocator() {
+  //Firebase Instance
+  getIt.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   //------------BLocAuth-------------------------------------
   //-AuthRemoteDataSource
   getIt.registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl());

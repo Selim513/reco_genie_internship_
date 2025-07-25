@@ -43,7 +43,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state.status == BlocStatus.success) {
-                  CustomSnackBar.successSnackBar(state.succMessage!, context);
+                  CustomSnackBar.confrimEmailSnackBar(
+                    state.succMessage!,
+                    context,
+                  );
                   context.goNamed(AppRouter.loginView);
                 } else {
                   CustomSnackBar.errorSnackBar(state.errMessage!, context);
@@ -63,25 +66,26 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         nameController: nameContoller,
                       ),
                       const CustomTermsAndPrivacySection(),
-                      state.status == BlocStatus.loading
-                          ? CircularProgressIndicator()
-                          : CustomElevatedButton(
-                              onPress: () async {
-                                if (formKey.currentState!.validate()) {
-                                  context.read<AuthBloc>().add(
-                                    RegisterEvent(
-                                      name: nameContoller.text,
-                                      email: emailContoller.text,
-                                      password: passwordContoller.text,
-                                    ),
-                                  );
-                                }
-                              },
-                              widget: Text(
+
+                      CustomElevatedButton(
+                        onPress: () async {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                              RegisterEvent(
+                                name: nameContoller.text,
+                                email: emailContoller.text,
+                                password: passwordContoller.text,
+                              ),
+                            );
+                          }
+                        },
+                        widget: state.status == BlocStatus.loading
+                            ? CircularProgressIndicator(color: Colors.white)
+                            : Text(
                                 'Create an account',
                                 style: AppFonts.mediumWhite16,
                               ),
-                            ),
+                      ),
                     ],
                   ),
                 ),

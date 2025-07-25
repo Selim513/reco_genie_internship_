@@ -36,7 +36,8 @@ class _LoginViewState extends State<LoginView> {
             if (state.status == BlocStatus.success) {
               CustomSnackBar.successSnackBar(state.succMessage!, context);
               context.goNamed(AppRouter.homeView);
-            } else {
+            } else if (state.status == BlocStatus.fail) {
+              print(state.errMessage);
               CustomSnackBar.errorSnackBar(state.errMessage!, context);
             }
           },
@@ -55,7 +56,9 @@ class _LoginViewState extends State<LoginView> {
                   passwordController: passwordContoller,
                 ),
                 CustomElevatedButton(
-                  widget: Text('Login', style: AppFonts.mediumWhite16),
+                  widget: state.status == BlocStatus.loading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text('Login', style: AppFonts.mediumWhite16),
                   onPress: () {
                     if (formKey.currentState!.validate()) {
                       context.read<AuthBloc>().add(
