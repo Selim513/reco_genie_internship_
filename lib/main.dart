@@ -24,7 +24,10 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (context, child) => MaterialApp.router(
         theme: ThemeData(
-          appBarTheme: AppBarTheme(centerTitle: true),
+          appBarTheme: AppBarTheme(
+            centerTitle: true,
+            color: Colors.transparent,
+          ),
           scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.inter().fontFamily,
         ),

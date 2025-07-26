@@ -13,14 +13,13 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3)).then((value) {
       if (mounted) {
         if (FirebaseAuth.instance.currentUser == null) {
           context.goNamed(AppRouter.registerView);
         } else {
-          context.goNamed(AppRouter.homeView);
+          context.goNamed(AppRouter.layOutView);
         }
       }
     });
