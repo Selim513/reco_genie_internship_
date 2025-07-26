@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reco_genie_internship/core/utils/app_fonts.dart';
 import 'package:reco_genie_internship/core/utils/app_route.dart';
 
 class SplashView extends StatefulWidget {
@@ -22,14 +21,6 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text(
-          'Resturant',
-          style: AppFonts.semiBoldBlack32.copyWith(color: Colors.white),
-        ),
-      ),
-    );
+    return Scaffold(body: Center(child: Image.asset('assets/logo.png')));
   }
 }
