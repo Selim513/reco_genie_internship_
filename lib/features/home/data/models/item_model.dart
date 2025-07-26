@@ -1,7 +1,7 @@
 class ItemModel {
   final String title;
   final String desc;
-  final num price;
+  final int price;
   final String imageUrl;
 
   ItemModel({
@@ -13,7 +13,7 @@ class ItemModel {
   factory ItemModel.fromJson(Map<String, dynamic> json) {
     return ItemModel(
       title: json['title'] ?? '',
-      price: json['price'] ?? 0,
+      price: json['price'] ?? 00,
 
       desc: json['description'] ?? '',
       imageUrl: json['image_url'] ?? '',

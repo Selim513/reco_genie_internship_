@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reco_genie_internship/core/utils/app_route.dart';
@@ -15,7 +16,13 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3)).then((value) {
-      context.goNamed(AppRouter.registerView);
+      if (mounted) {
+        if (FirebaseAuth.instance.currentUser == null) {
+          context.goNamed(AppRouter.registerView);
+        } else {
+          context.goNamed(AppRouter.homeView);
+        }
+      }
     });
   }
 

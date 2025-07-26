@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomItemImage extends StatelessWidget {
-  const CustomItemImage({super.key});
-
+  const CustomItemImage({super.key, required this.imageUrl});
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +13,8 @@ class CustomItemImage extends StatelessWidget {
 
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('assets/burger.jpg'),
+          image: NetworkImage(imageUrl)
+          // AssetImage('assets/burger.jpg'),
         ),
       ),
     );

@@ -4,15 +4,15 @@ import 'package:reco_genie_internship/core/utils/app_fonts.dart';
 import 'package:reco_genie_internship/features/home/presentation/views/widgets/custom_star_rate.dart';
 
 class PriceAndRateWidget extends StatelessWidget {
-  const PriceAndRateWidget({super.key});
-
+  const PriceAndRateWidget({super.key, required this.price});
+  final int price;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '\$18.99',
+          '\$$price.00',
           style: AppFonts.blackBol25.copyWith(
             color: Colors.blue,
             fontSize: 20.sp,

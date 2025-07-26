@@ -6,8 +6,13 @@ import 'package:reco_genie_internship/features/auth/domain/use_case/register_use
 import 'package:reco_genie_internship/features/auth/presentation/manger/auth_bloc.dart';
 import 'package:reco_genie_internship/features/auth/presentation/views/login_view.dart';
 import 'package:reco_genie_internship/features/auth/presentation/views/register_view.dart';
-import 'package:reco_genie_internship/features/splash/presentation/views/splash_view.dart';
+import 'package:reco_genie_internship/features/home/data/data_sorce/home_remote_data_source.dart';
+import 'package:reco_genie_internship/features/home/data/repo/home_repo_impl.dart';
+import 'package:reco_genie_internship/features/home/domain/use_case/fetch_menu_item.dart';
+import 'package:reco_genie_internship/features/home/presentation/manger/home_bloc.dart';
+import 'package:reco_genie_internship/features/home/presentation/manger/home_event.dart';
 import 'package:reco_genie_internship/features/home/presentation/views/home_view.dart';
+import 'package:reco_genie_internship/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
   static String splashView = '/';
@@ -43,7 +48,12 @@ abstract class AppRouter {
       GoRoute(
         name: homeView,
         path: homeView,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => HomeBloc(
+            FetchMenuItemUseCase(HomeRepoImpl(HomeRemoteDataSourceImpl())),
+          )..add(FetchMenuItem()),
+          child: const HomeView(),
+        ),
       ),
     ],
   );
