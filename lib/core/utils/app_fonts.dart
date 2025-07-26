@@ -7,6 +7,11 @@ abstract class AppFonts {
     fontSize: 32.sp,
     fontWeight: FontWeight.w900,
   );
+  static final TextStyle blackBol25 = TextStyle(
+    color: Colors.black,
+    fontSize: 25.sp,
+    fontWeight: FontWeight.bold,
+  );
   static final TextStyle regularBoldBlack14 = TextStyle(
     color: Colors.black,
     fontSize: 14.sp,

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reco_genie_internship/core/observer/simple_bloc_observer.dart';
 import 'package:reco_genie_internship/core/utils/service_locator.dart';
 import 'package:reco_genie_internship/firebase_options.dart';
-import 'package:reco_genie_internship/home_view.dart';
+import 'package:reco_genie_internship/features/home/presentation/views/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +24,7 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (context, child) => MaterialApp(
         theme: ThemeData(
+          appBarTheme: AppBarTheme(centerTitle: true),
           scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.inter().fontFamily,
         ),
