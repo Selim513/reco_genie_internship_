@@ -61,7 +61,8 @@ import 'package:reco_genie_internship/features/home/presentation/manger/home_blo
 import 'package:reco_genie_internship/features/home/presentation/manger/home_state.dart';
 import 'package:reco_genie_internship/features/home/presentation/views/widgets/custom_menu_banner.dart';
 import 'package:reco_genie_internship/features/home/presentation/views/widgets/custom_search_bar.dart';
-import 'package:reco_genie_internship/features/home/presentation/views/widgets/menu_items_container.dart';
+import 'package:reco_genie_internship/features/home/presentation/views/widgets/menu_item_container_body.dart';
+import 'package:reco_genie_internship/core/widgets/menu_items_container.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -90,8 +91,9 @@ class HomeViewBody extends StatelessWidget {
                 List<ItemModel>? itemList = state.itemsList;
                 return SliverList.separated(
                   itemCount: itemList!.length,
-                  itemBuilder: (context, index) =>
-                      MenuItemsContainer(itemList: itemList[index]),
+                  itemBuilder: (context, index) => MenuItemsContainer(
+                    widget: MenuItemContainerBody(itemList: itemList[index]),
+                  ),
                   separatorBuilder: (context, index) => Gap(15.h),
                 );
               } else if (state.status == BlocStatus.fail) {
