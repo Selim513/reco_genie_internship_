@@ -6,7 +6,7 @@ import 'package:reco_genie_internship/features/auth/domain/use_case/register_use
 import 'package:reco_genie_internship/features/auth/presentation/manger/auth_bloc.dart';
 import 'package:reco_genie_internship/features/auth/presentation/views/login_view.dart';
 import 'package:reco_genie_internship/features/auth/presentation/views/register_view.dart';
-import 'package:reco_genie_internship/features/splash/presentation/splash_view.dart';
+import 'package:reco_genie_internship/features/splash/presentation/views/splash_view.dart';
 import 'package:reco_genie_internship/features/home/presentation/views/home_view.dart';
 
 abstract class AppRouter {
