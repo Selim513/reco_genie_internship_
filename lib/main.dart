@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:reco_genie_internship/core/notification/firebase_notification.dart';
 import 'package:reco_genie_internship/core/observer/simple_bloc_observer.dart';
 import 'package:reco_genie_internship/core/utils/app_route.dart';
 import 'package:reco_genie_internship/core/utils/service_locator.dart';
@@ -11,6 +12,9 @@ import 'package:reco_genie_internship/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FirebaseNotificationHelper.init();
+
   Bloc.observer = SimpleBlocObserver();
   serviceLocator();
   runApp(const MainApp());
